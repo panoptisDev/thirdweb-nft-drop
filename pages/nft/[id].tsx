@@ -1,6 +1,7 @@
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 
 function NFTDropPage() {
   // auth
@@ -14,10 +15,13 @@ function NFTDropPage() {
       <div className="bg-gradient-to-l from-slate-800 to-rose-500 lg:col-span-4">
         <div className="flex flex-col items-center justify-center py-2 lg:min-h-screen">
           <div className="mt-6 bg-[#FED9B9] rounded-xl p-2  shadow-2xl transition duration-500 hover:scale-105">
-            <img
+            <Image
               src="/robotic.png"
               alt="nft drop image"
               className="w-44 rounded-xl object-cover lg:h-96 lg:w-72"
+              height={1000}
+              width={1000}
+              priority
             />
           </div>
           <div className="text-center p-5 space-y-4">
@@ -32,7 +36,7 @@ function NFTDropPage() {
       {/* right */}
       <div className="flex flex-1 flex-col p-12 lg:col-span-6">
         {/* header */}
-        <header className="flex justify-between items-center">
+        <header className="flex flex-col text-center space-y-2 justify-between items-center md:flex-row md:space-y-0 md:text-left">
           <h1 className="w-52 text-xl font-extralight sm:w-80 text-white">
             premier{" "}
             <Link href="/">
@@ -63,10 +67,13 @@ function NFTDropPage() {
         {/* content */}
         <div className="flex flex-col flex-1 items-center justify-center mt-10 space-y-6 text-center">
           <div className="bg-gradient-to-tr from-rose-800 to-purple-800 p-2 rounded-xl shadow-2xl hover:scale-105 duration-500">
-            <img
+            <Image
               src="/grid_0.png"
               alt="collection image"
               className="w-80 rounded-lg shadow-2xl lg:w-96  transition duration-500 object-contain"
+              width={1000}
+              height={1000}
+              priority
             />
           </div>
           <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold text-white">

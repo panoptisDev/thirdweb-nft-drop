@@ -15,9 +15,15 @@ const Home: NextPage = () => {
       justify-center"
       >
         <Link className="cursor-pointer" href="/nft/robo">
-          <Image src="/ceremoney.png" alt="hero" width={480} height={480} />
+          <Image
+            src="/ceremoney.png"
+            alt="hero"
+            width={480}
+            height={480}
+            priority
+          />
           <p className="text-white text-center text-xl font-extralight">
-            robo drop
+            vapor robo
           </p>
         </Link>
       </div>
