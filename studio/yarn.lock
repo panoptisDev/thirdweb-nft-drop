@@ -1541,7 +1541,7 @@
     get-random-values-esm "^1.0.0"
     lodash "^4.17.21"
 
-"@sanity/cli@3.3.1":
+"@sanity/cli@3.3.1", "@sanity/cli@^3.3.1":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-3.3.1.tgz#9fc15e7f52630f2e489f39f5a7c09da94a62576b"
   integrity sha512-Z7bwyO9s0gv8em4EPwruQZIQqB3fH9NjB0ZOdmyraPmQ3OBtQJeIQu2HZ45JYVMK52f01QdSIf1GORaYLwZv8Q==
@@ -5550,7 +5550,7 @@ sanity-diff-patch@^1.0.9:
   dependencies:
     diff-match-patch "^1.0.5"
 
-sanity@^3.0.0:
+sanity@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/sanity/-/sanity-3.3.1.tgz#2bd4e48cfbb7e017f78ad22d9daa3cc814fa7017"
   integrity sha512-dbEApYD4Cbw7lS/1lDnw6PLi/qvUtfjGLNiIIz3//6CdPz0JITRG0hJb9nLMg2j2A/jsMuRcIEZ2k/R19aOcbw==
