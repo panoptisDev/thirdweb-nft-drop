@@ -59,6 +59,7 @@ module.exports = {
       fontFamily: {
         "press-start": ['"Press Start 2P"', "cursive"],
         "space-grotesk": ['"Space Grotesk"', "sans-serif"],
+        ultra: ['"Ultra"', "sans-serif"],
       },
       backgroundImage: {
         ceremoney:

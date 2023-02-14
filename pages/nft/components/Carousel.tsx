@@ -4,7 +4,7 @@ function Carousel() {
   return (
     <div className="carousel w-1/2 md:w-3/4 rounded-xl mt-4">
       <div id="slide1" className="carousel-item relative w-full">
-        <img src="/grid_3.png" className="w-full" />
+        <img src="/robos/grid_3.png" className="w-full" />
         <div className="absolute flex justify-between transform -translate-y-1/2 left-2 right-2 -bottom-4">
           <a
             href="#slide4"
@@ -21,7 +21,7 @@ function Carousel() {
         </div>
       </div>
       <div id="slide2" className="carousel-item relative w-full">
-        <img src="/grid_2.png" className="w-full" />
+        <img src="/robos/grid_2.png" className="w-full" />
         <div className="absolute flex justify-between transform -translate-y-1/2 left-2 right-2 -bottom-4">
           <a
             href="#slide1"
@@ -38,7 +38,7 @@ function Carousel() {
         </div>
       </div>
       <div id="slide3" className="carousel-item relative w-full">
-        <img src="/grid_1.png" className="w-full" />
+        <img src="/robos/grid_1.png" className="w-full" />
         <div className="absolute flex justify-between transform -translate-y-1/2 left-2 right-2 -bottom-4">
           <a
             href="#slide2"
@@ -55,7 +55,7 @@ function Carousel() {
         </div>
       </div>
       <div id="slide4" className="carousel-item relative w-full">
-        <img src="/grid_4.png" className="w-full" />
+        <img src="/robos/grid_4.png" className="w-full" />
         <div className="absolute flex justify-between transform -translate-y-1/2 left-2 right-2 -bottom-4">
           <a
             href="#slide3"
@@ -72,7 +72,7 @@ function Carousel() {
         </div>
       </div>
       <div id="slide5" className="carousel-item relative w-full">
-        <img src="/grid_5.png" className="w-full" />
+        <img src="/robos/grid_5.png" className="w-full" />
         <div className="absolute flex justify-between transform -translate-y-1/2 left-2 right-2 -bottom-4">
           <a
             href="#slide4"
@@ -89,7 +89,7 @@ function Carousel() {
         </div>
       </div>
       <div id="slide6" className="carousel-item relative w-full">
-        <img src="/grid_6.png" className="w-full" />
+        <img src="/robos/grid_6.png" className="w-full" />
         <div className="absolute flex justify-between transform -translate-y-1/2 left-2 right-2 -bottom-4">
           <a
             href="#slide5"
