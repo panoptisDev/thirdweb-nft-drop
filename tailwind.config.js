@@ -11,6 +11,10 @@ module.exports = {
         "press-start": ['"Press Start 2P"', "cursive"],
         "space-grotesk": ['"Space Grotesk"', "sans-serif"],
       },
+      backgroundImage: {
+        ceremoney:
+          "linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/ceremoney_bg.webp')",
+      },
     },
   },
   plugins: [require("daisyui")],
