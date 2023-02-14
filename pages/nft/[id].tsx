@@ -1,18 +1,39 @@
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Carousel from "./components/Carousel";
-import css from "styled-jsx/css";
+
+type MintingSteps = undefined | "minting" | "minted";
 
 function NFTDropPage() {
   // auth
   //const connectWithMetaMask = useMetamask();
   //const disconnect = useDisconnect();
   const address = useAddress();
-  const redBackground = css`
-    background-color: red;
-  `;
+
+  const [minting, setMinting] = React.useState<MintingSteps>(undefined);
+  const [minted, setMinted] = React.useState(0);
+
+  useEffect(() => {
+    if (minted === 50) {
+      setMinting(undefined);
+      return;
+    }
+    if (minting === "minting") {
+      setTimeout(() => {
+        setMinting("minted");
+      }, 3000);
+    }
+
+    if (minting === "minted") {
+      setTimeout(() => {
+        setMinting(undefined);
+        setMinted(minted + 1);
+      }, 3000);
+    }
+  }, [minting]);
+
   return (
     <div className="flex flex-col min-h-screen bg-slate-800 lg:grid lg:grid-cols-10">
       {/* left */}
@@ -94,19 +115,50 @@ function NFTDropPage() {
             </div>
           </div>
           <p className="text-xl lg:text-lg text-rose-400 font-extralight">
-            - / 50 minted
+            {minted} / 50 minted
           </p>
         </div>
 
         {/* mint button */}
         <div
           className={`p-2 ${address ? "cursor-pointer" : "cursor-not-allowed"}`}
+          onClick={() => {
+            if (address && minting === undefined) {
+              setMinting("minting");
+            }
+          }}
         >
+          {minting && (
+            <div className="toast toast-end z-10 pb-24">
+              {minting === "minting" ? (
+                <div className="alert alert-info">
+                  <div>
+                    <span>mint starting</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="alert alert-success">
+                  <div>
+                    <span>mint success</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
           <button
-            disabled={!!address}
-            className={`h-16 lg:h-12 lg:mb-4 w-full bg-rose-700 mt-10 lg:mt-6 rounded-full text-white font-bold border border-white shadow-md shadow-slate-600 duration-150 ${
-              address ? "cursor-pointer animate-bounce" : "cursor-not-allowed"
-            } ${!address && "opacity-50"}`}
+            disabled={address === undefined}
+            className={`visible h-16 lg:h-12 lg:mb-4 w-full bg-rose-700 mt-10 lg:mt-6 rounded-full text-white font-bold border border-white shadow-md shadow-slate-600 duration-150 ${
+              minting === undefined && address
+                ? "cursor-pointer animate-bounce"
+                : "cursor-not-allowed"
+            } ${(!address || minting) && "opacity-50"}`}
+            onClick={() => {
+              console.log("minting", minting);
+              console.log(address);
+              if (address && minting === undefined) {
+                setMinting("minting");
+              }
+            }}
           >
             mint nft (0.01 eth)
           </button>
