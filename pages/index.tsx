@@ -25,7 +25,7 @@ const Home: NextPage = () => {
           <h1 className="text-white text-4xl font-space-grotesk">CEREMONEY</h1>
           <p className="text-white text-1xl font-space-grotesk">presents</p>
         </div>
-        <Link className="cursor-pointer" href="/nft/robo">
+        <Link className="cursor-pointer" href="/nft/vapor-robos">
           <div className="p-2 bg-gradient-to-bl to-[#F97A65] from-[#6F3056] rounded-lg">
             <Image
               src="/vaporrobo.png"

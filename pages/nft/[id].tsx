@@ -14,9 +14,10 @@ function NFTDropPage() {
 
   const [minting, setMinting] = React.useState<MintingSteps>(undefined);
   const [minted, setMinted] = React.useState(0);
+  const [add, setAdd] = React.useState(false);
 
   useEffect(() => {
-    if (minted === 50) {
+    if (minted === 500) {
       setMinting(undefined);
       return;
     }
@@ -30,9 +31,14 @@ function NFTDropPage() {
       setTimeout(() => {
         setMinting(undefined);
         setMinted(minted + 1);
+        setAdd(true);
+
+        setTimeout(() => {
+          setAdd(false);
+        }, 3000);
       }, 3000);
     }
-  }, [minting]);
+  }, [minting, minted, add]);
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-800 lg:grid lg:grid-cols-10">
@@ -96,32 +102,46 @@ function NFTDropPage() {
           <h1 className="text-3xl font-bold lg:font-extrabold text-white">
             the vapor robos | nft drop
           </h1>
-          <div className="flex items-center space-x-10">
-            <div className="flex flex-col items-center space-y-4 lg:space-y-2">
-              <Image
-                src="/avatar.png"
-                alt=""
-                className="rounded-full border border-white w-20 lg:w-16"
-                width={800}
-                height={800}
-                priority
-              />
-              <p className="text-rose-400 font-extralight text-xl lg:text-lg text-white">
-                creator:
-              </p>
+          <Link href="/creator/ryanimosity-eth">
+            <div className="flex items-center space-x-10 border border-rose-500 p-4 rounded-xl bg-rose-500/20 hover:animate-pulse">
+              <div className="flex flex-col items-center space-y-4 lg:space-y-2">
+                <Image
+                  src="/avatar.png"
+                  alt=""
+                  className="rounded-full border border-white w-20 lg:w-16"
+                  width={800}
+                  height={800}
+                  priority
+                />
+                <p className="font-extralight text-xl lg:text-lg text-white">
+                  creator:
+                </p>
+              </div>
+              <div className="flex flex-col items-center space-y-4 text-white text-4xl font-extralight underline decoration-rose-500/60">
+                ryanimosity.eth
+              </div>
             </div>
-            <div className="flex flex-col items-center space-y-4 text-white text-4xl font-extralight underline decoration-rose-500/60">
-              ryanimosity.eth
-            </div>
-          </div>
-          <p className="text-xl lg:text-lg text-rose-400 font-extralight">
-            {minted} / 50 minted
+          </Link>
+          <p
+            className={`text-xl lg:text-lg text-rose-400 font-extralight transition duration-300 ${
+              add && "border border-green-400 p-2 rounded-full animate-pulse"
+            }`}
+          >
+            {minted} / 500 minted{" "}
+            {add && (
+              <span className="text-xl text-green-500 animate-pulse transition duration-300">
+                {" "}
+                +1
+              </span>
+            )}
           </p>
         </div>
 
         {/* mint button */}
         <div
-          className={`p-2 ${address ? "cursor-pointer" : "cursor-not-allowed"}`}
+          className={`p-2 transition duration-300 ${
+            address ? "cursor-pointer" : "cursor-not-allowed"
+          }`}
           onClick={() => {
             if (address && minting === undefined) {
               setMinting("minting");
