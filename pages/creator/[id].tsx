@@ -7,10 +7,10 @@ function Creator() {
   return (
     <div className="flex flex-col min-h-screen bg-slate-900">
       <div className="flex flex-col items-center mt-16">
-        <div className="text-4xl text-white underline decoration-teal-500 font-extrabold">
+        <div className="text-4xl text-white underline decoration-teal-300/50 font-extrabold">
           ryanimosity.eth
         </div>
-        <div className="shadow-sm shadow-teal-500 flex flex-col items-center mt-16 p-1 bg-teal-500 rounded-full animate-wiggle">
+        <div className="shadow-sm shadow-teal-500 flex flex-col items-center mt-16 p-1 bg-orange-500/80 rounded-full animate-wiggle">
           <Image
             src="/avatar.png"
             alt=""
