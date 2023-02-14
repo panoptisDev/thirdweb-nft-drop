@@ -93,7 +93,7 @@ function Creator() {
                 <td>
                   <div className="relative flex flex-col sm:flex-row sm:items-center">
                     500{" "}
-                    <div className="absolute badge badge-ghost badge-sm -bottom-6 sm:ml-2 sm:relative sm:bottom-0">
+                    <div className="absolute h-7 badge badge-ghost badge-sm -bottom-8 sm:ml-2 sm:relative sm:bottom-0">
                       Midjourney AI
                     </div>
                   </div>
