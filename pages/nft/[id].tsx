@@ -123,12 +123,12 @@ function NFTDropPage() {
             </div>
           </Link>
           <p
-            className={`text-xl lg:text-lg text-rose-400 font-extralight transition duration-300 p-2 min-w-24 pr-8 ${
-              add && "border border-green-400 rounded-full animate-pulse pr-2"
+            className={`text-xl lg:text-lg text-rose-400 font-extralight transition duration-300 p-2 pr-3 min-w-24 ${
+              true && "border border-green-400 rounded-full animate-pulse"
             }`}
           >
             {minted} / 500 minted{" "}
-            {add && (
+            {true && (
               <span className="text-xl lg:text-lg text-green-500 animate-pulse transition duration-300">
                 {" "}
                 +1
