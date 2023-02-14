@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         />
         <link rel="stylesheet" href="styles.css" />
       </Head>
-      <div className="flex flex-col min-h-screen bg-black bg-ceremoney bg-darken-10 bg-no-repeat bg-center bg-fixed items-center justify-center p-14">
+      <div className="flex flex-col min-h-screen bg-black bg-opacity-50 bg-ceremoney bg-darken-10 bg-no-repeat bg-center bg-fixed items-center justify-center p-14">
         <div className="text-center space-y-12 mb-12">
           <h1 className="text-white text-4xl font-space-grotesk">CEREMONEY</h1>
           <p className="text-white text-1xl font-space-grotesk">presents</p>
