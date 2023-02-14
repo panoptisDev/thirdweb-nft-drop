@@ -64,6 +64,40 @@ function Carousel() {
             ❮
           </a>
           <a
+            href="#slide5"
+            className="btn btn-circle w-5 md:w-12 bg-rose-500 text-white border-white hover:border-white hover:bg-slate-800"
+          >
+            ❯
+          </a>
+        </div>
+      </div>
+      <div id="slide5" className="carousel-item relative w-full">
+        <img src="/grid_5.png" className="w-full" />
+        <div className="absolute flex justify-between transform -translate-y-1/2 left-2 right-2 -bottom-4">
+          <a
+            href="#slide4"
+            className="btn btn-circle w-5 md:w-12 bg-rose-500 text-white border-white hover:border-white hover:bg-slate-800"
+          >
+            ❮
+          </a>
+          <a
+            href="#slide6"
+            className="btn btn-circle w-5 md:w-12 bg-rose-500 text-white border-white hover:border-white hover:bg-slate-800"
+          >
+            ❯
+          </a>
+        </div>
+      </div>
+      <div id="slide6" className="carousel-item relative w-full">
+        <img src="/grid_6.png" className="w-full" />
+        <div className="absolute flex justify-between transform -translate-y-1/2 left-2 right-2 -bottom-4">
+          <a
+            href="#slide5"
+            className="btn btn-circle w-5 md:w-12 bg-rose-500 text-white border-white hover:border-white hover:bg-slate-800"
+          >
+            ❮
+          </a>
+          <a
             href="#slide1"
             className="btn btn-circle w-5 md:w-12 bg-rose-500 text-white border-white hover:border-white hover:bg-slate-800"
           >
