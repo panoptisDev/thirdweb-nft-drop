@@ -53,7 +53,7 @@ typings/
 .npm
 
 # Sanity studio
-studio/
+studio/node_modules
 
 # Optional eslint cache
 .eslintcache
