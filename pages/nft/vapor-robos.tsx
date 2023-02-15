@@ -91,26 +91,26 @@ function VaporRobos() {
           <div className="flex flex-col flex-1 items-center justify-center mt-10 lg:mt-2 space-y-4 text-center">
             <div className="bg-gradient-to-tr from-rose-800 to-purple-800 p-2 rounded-xl shadow-2xl hover:scale-105 duration-500">
               <Image
-                src="/grid_0.png"
+                src="/grid_0.webp"
                 alt="collection image"
                 className="w-80 rounded-lg shadow-2xl transition duration-500 object-contain"
-                width={800}
-                height={800}
+                width={200}
+                height={200}
                 priority
               />
             </div>
             <h1 className="text-2xl font-bold lg:font-extrabold text-white font-press-start py-2">
-              the vapor robos | nft drop
+              vapor robos | nft drop
             </h1>
             <Link href="/creator/ryanimosity-eth">
               <div className="flex items-center space-x-10 border border-rose-500 p-4 rounded-xl bg-rose-500/20 hover:animate-pulse">
                 <div className="flex flex-col items-center space-y-4 lg:space-y-2">
                   <Image
-                    src="/avatar.png"
-                    alt=""
+                    src="/avatar.webp"
+                    alt="creator avatar"
                     className="rounded-full border border-white w-20 lg:w-16"
-                    width={800}
-                    height={800}
+                    width={200}
+                    height={200}
                     priority
                   />
                   <p className="font-extralight text-xl lg:text-lg text-white">

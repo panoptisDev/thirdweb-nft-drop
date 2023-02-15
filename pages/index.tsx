@@ -46,7 +46,7 @@ const Home: NextPage = () => {
           <div className="flex flex-col items-center justify-center w-48 md:w-64 lg:w-64 bg-slate-800 rounded-lg mt-4 shadow-md shadow-slate-800 hover:scale-[1.02] hover:-translate-y-1 transition duration-300 cursor-pointer">
             <Image
               src="/golden_era.png"
-              alt=""
+              alt="golden era card"
               height={340}
               width={340}
               className="rounded-t-lg border-4 border-slate-800"

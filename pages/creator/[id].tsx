@@ -12,8 +12,8 @@ function Creator() {
         </div>
         <div className="shadow-sm shadow-teal-500 flex flex-col items-center mt-16 p-1 bg-orange-500/80 rounded-full animate-wiggle">
           <Image
-            src="/avatar.png"
-            alt=""
+            src="/avatar.webp"
+            alt="creator avatar"
             className=" w-48 lg:w-60 rounded-full"
             width={800}
             height={800}
@@ -81,7 +81,7 @@ function Creator() {
                     >
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
-                          <img src="/grid_0.png" alt="collection image" />
+                          <img src="/grid_0.webp" alt="collection image" />
                         </div>
                       </div>
                       <div>
