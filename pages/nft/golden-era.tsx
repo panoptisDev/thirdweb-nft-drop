@@ -17,7 +17,7 @@ function GoldenEra({ collection }: { collection: Collection }) {
       <div className="flex flex-col justify-center items-center min-h-screen bg-black bg-opacity-50">
         <div className="w-3/4 mt-10">
           <Header />
-          <div className="flex justify-center font-ultra tracking-wider text-[#FFD700] text-4xl sm:text-5xl md:text-6xl rounded-xl mt-12 underline decoration-white underline-offset-8 uppercase">
+          <div className="flex justify-center text-3xl text-center font-ultra tracking-wider text-[#FFD700] sm:text-4xl md:text-6xl rounded-xl mt-12 underline decoration-white underline-offset-8 uppercase">
             {collection.collectionName}
           </div>
         </div>
