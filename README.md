@@ -3,13 +3,21 @@
 ## Routes
 
 - `/`
-- `nft/[id]`
-- `creator/[id]`
+- `/nft/[id]`
+- `/nft/vapor-robos`
+- `/nft/golden-era`
+- `/creator/[id]`
 
 ## Coming soon
 
-- Sanity CMS BE
-- Multiple drops
 - AI Image Gen Drop functionality
 - Secondary Market
 - TBD
+
+## Fixes
+
+- Connect creator to collection in cms
+- refactor components for re-use
+- refactor ssr
+- use layout.tsx
+- hook up minting addresses

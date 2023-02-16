@@ -2,20 +2,23 @@ import React from "react";
 import Header from "./components/Header";
 import Image from "next/image";
 import Head from "next/head";
+import { GetServerSideProps } from "next/types";
+import { Collection } from "../../types/typings";
+import sanityClient from "../../lib/sanity";
 
-function GoldenEra() {
+function GoldenEra({ collection }: { collection: Collection }) {
   return (
     <>
       <Head>
-        <title>golden era</title>
+        <title>{collection.title}</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="styles.css" />
       </Head>
       <div className="flex flex-col justify-center items-center min-h-screen bg-black bg-opacity-50">
         <div className="w-3/4 mt-10">
           <Header />
-          <div className="flex justify-center font-ultra tracking-wider text-[#FFD700] text-4xl sm:text-5xl md:text-6xl rounded-xl mt-12 underline decoration-white underline-offset-8">
-            GOLDEN ERA
+          <div className="flex justify-center font-ultra tracking-wider text-[#FFD700] text-4xl sm:text-5xl md:text-6xl rounded-xl mt-12 underline decoration-white underline-offset-8 uppercase">
+            {collection.collectionName}
           </div>
         </div>
 
@@ -139,3 +142,45 @@ function GoldenEra() {
 }
 
 export default GoldenEra;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const query = `
+    *[_type == "collection" && slug.current == "golden-era"][0]{
+      _id,
+      title,
+      address,
+      description,
+      collectionName,
+      mainImage {
+        asset
+      },
+      previewImage {
+        asset
+      },
+      slug {
+        current
+      },
+      creator => {
+        _id,
+        name,
+        address,
+        slug {
+          current
+        },
+      },
+    }
+  `;
+  const collection: Collection = await sanityClient.fetch(query);
+
+  if (!collection) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      collection,
+    },
+  };
+};

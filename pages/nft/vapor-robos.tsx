@@ -1,14 +1,18 @@
-import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
+import { useAddress } from "@thirdweb-dev/react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import Image from "next/image";
 import Carousel from "./components/Carousel";
 import Header from "./components/Header";
 import Head from "next/head";
+import { GetServerSideProps } from "next/types";
+import { Collection } from "../../types/typings";
+import sanityClient from "../../lib/sanity";
+import imageUrlFor from "../../utils/imageUrlFor";
 
 type MintingSteps = undefined | "minting" | "minted";
 
-function VaporRobos() {
+function VaporRobos({ collection }: { collection: Collection }) {
   // auth
   //const connectWithMetaMask = useMetamask();
   //const disconnect = useDisconnect();
@@ -45,7 +49,7 @@ function VaporRobos() {
   return (
     <>
       <Head>
-        <title>vapor robos</title>
+        <title>{collection.title}</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="styles.css" />
       </Head>
@@ -59,7 +63,7 @@ function VaporRobos() {
                 the robos
               </h1>
               <h2 className="text-sm lg:text-lg text-gray-200 font-press-start p-2">
-                a collection of robo nfts who were built of the metaverse
+                {collection.description}
               </h2>
             </div>
 
@@ -100,13 +104,17 @@ function VaporRobos() {
               />
             </div>
             <h1 className="text-2xl font-bold lg:font-extrabold text-white font-press-start py-2">
-              vapor robos | nft drop
+              {collection.collectionName}
             </h1>
             <Link href="/creator/ryanimosity-eth">
               <div className="flex items-center space-x-10 border border-rose-500 p-4 rounded-xl bg-rose-500/20 hover:animate-pulse">
                 <div className="flex flex-col items-center space-y-4 lg:space-y-2">
                   <Image
-                    src="/avatar.webp"
+                    src={`${
+                      (collection.creator &&
+                        imageUrlFor(collection.creator?.image).url()) ||
+                      "/avatar.webp"
+                    }`}
                     alt="creator avatar"
                     className="rounded-full border border-white w-20 lg:w-16"
                     width={200}
@@ -118,7 +126,7 @@ function VaporRobos() {
                   </p>
                 </div>
                 <div className="flex flex-col items-center space-y-4 text-white text-4xl font-extralight underline decoration-rose-500/60">
-                  ryanimosity.eth
+                  {collection.creator?.name || "ryanimosity.eth"}
                 </div>
               </div>
             </Link>
@@ -190,3 +198,46 @@ function VaporRobos() {
 }
 
 export default VaporRobos;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const query = `
+    *[_type == "collection" && slug.current == "vapor-robos"][0]{
+      _id,
+      title,
+      address,
+      description,
+      collectionName,
+      mainImage {
+        asset
+      },
+      previewImage {
+        asset
+      },
+      slug {
+        current
+      },
+      creator => {
+        _id,
+        name,
+        address,
+        slug {
+          current
+        },
+      }
+    }
+  `;
+
+  const collection: Collection = await sanityClient.fetch(query);
+
+  if (!collection) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      collection,
+    },
+  };
+};

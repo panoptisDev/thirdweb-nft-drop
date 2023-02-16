@@ -13,7 +13,7 @@ function Header() {
               ceremoney
             </span>
           </Link>{" "}
-          marketplace
+          nft platform
         </h1>
         <ConnectWallet btnTitle="connect web3" />
         {/* <button

@@ -68,7 +68,7 @@ function Creator() {
               <tr>
                 <th>name</th>
                 <th>editions</th>
-                <th>floor</th>
+                <th>mint price</th>
               </tr>
             </thead>
             <tbody>
@@ -92,7 +92,7 @@ function Creator() {
                 </td>
                 <td>
                   <div className="relative flex flex-col sm:flex-row sm:items-center">
-                    500{" "}
+                    8{" "}
                     <div className="absolute h-7 badge badge-ghost badge-sm -bottom-8 sm:ml-2 sm:relative sm:bottom-0">
                       Midjourney AI
                     </div>
@@ -100,7 +100,7 @@ function Creator() {
                 </td>
                 <td>
                   <div className="relative flex flex-col sm:flex-row">
-                    0.01{" "}
+                    0.1{" "}
                     <div className="absolute -bottom-6 sm:relative sm:bottom-0 sm:ml-2">
                       {" "}
                       eth
