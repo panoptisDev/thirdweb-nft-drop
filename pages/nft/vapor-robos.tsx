@@ -1,4 +1,4 @@
-import { useAddress } from "@thirdweb-dev/react";
+import { useAddress, useContract } from "@thirdweb-dev/react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import Image from "next/image";
@@ -18,15 +18,29 @@ function VaporRobos({ collection }: { collection: Collection }) {
   //const disconnect = useDisconnect();
   const address = useAddress();
 
+  const { contract, isLoading } = useContract(collection.address, "nft-drop");
+  const [claimedSupply, setClaimedSupply] = React.useState<string>("0");
+  const [totalSupply, setTotalSupply] = React.useState<string>("0");
+
   const [minting, setMinting] = React.useState<MintingSteps>(undefined);
-  const [minted, setMinted] = React.useState(0);
   const [add, setAdd] = React.useState(false);
 
   useEffect(() => {
-    if (minted === 500) {
+    (async () => {
+      const [claimed, total] = await Promise.all([
+        contract?.totalClaimedSupply(),
+        contract?.totalSupply(),
+      ]);
+
+      setClaimedSupply((claimed || "0").toString());
+      setTotalSupply((total || "0").toString());
+    })();
+
+    if (claimedSupply === totalSupply) {
       setMinting(undefined);
       return;
     }
+
     if (minting === "minting") {
       setTimeout(() => {
         setMinting("minted");
@@ -36,7 +50,7 @@ function VaporRobos({ collection }: { collection: Collection }) {
     if (minting === "minted") {
       setTimeout(() => {
         setMinting(undefined);
-        setMinted(minted + 1);
+        setClaimedSupply((Number(claimedSupply) + 1).toString());
         setAdd(true);
 
         setTimeout(() => {
@@ -44,7 +58,10 @@ function VaporRobos({ collection }: { collection: Collection }) {
         }, 3000);
       }, 3000);
     }
-  }, [minting, minted, add, address]);
+  }, [address, minting, add, contract, isLoading]);
+
+  const allMinted = Number(claimedSupply) >= Number(totalSupply);
+  const disabled = address === undefined || allMinted || minting !== undefined;
 
   return (
     <>
@@ -135,7 +152,9 @@ function VaporRobos({ collection }: { collection: Collection }) {
                 add && "border border-green-400 rounded-full animate-pulse"
               }`}
             >
-              {minted} / 500 minted{" "}
+              {isLoading
+                ? "Loading...."
+                : `${claimedSupply} / ${totalSupply} minted `}
               {add && (
                 <span className="font-press-start text-xl lg:text-lg text-green-500 animate-pulse transition duration-300">
                   {" "}
@@ -148,7 +167,7 @@ function VaporRobos({ collection }: { collection: Collection }) {
           {/* mint button */}
           <div
             className={`p-2 transition duration-300 ${
-              address ? "cursor-pointer" : "cursor-not-allowed"
+              disabled ? "cursor-not-allowed" : "cursor-pointer"
             }`}
             onClick={() => {
               if (address && minting === undefined) {
@@ -174,15 +193,11 @@ function VaporRobos({ collection }: { collection: Collection }) {
               </div>
             )}
             <button
-              disabled={address === undefined}
-              className={`visible h-16 lg:h-12 lg:mb-4 w-full bg-rose-700 mt-10 lg:mt-6 rounded-full text-white font-bold border border-white shadow-md shadow-slate-600 duration-150 ${
-                minting === undefined && address
-                  ? "cursor-pointer animate-bounce"
-                  : "cursor-not-allowed"
-              } ${(!address || minting) && "opacity-50"}`}
+              disabled={disabled}
+              className={`visible h-16 lg:h-12 lg:mb-4 w-full bg-rose-700 mt-10 lg:mt-6 rounded-full text-white font-bold border border-white shadow-md shadow-slate-600 duration-150 cursor-pointer animate-bounce disabled:cursor-not-allowed ${
+                disabled && "opacity-50 animate-none"
+              }`}
               onClick={() => {
-                console.log("minting", minting);
-                console.log(address);
                 if (address && minting === undefined) {
                   setMinting("minting");
                 }
