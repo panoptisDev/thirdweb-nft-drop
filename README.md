@@ -20,4 +20,3 @@
 - refactor components for re-use
 - refactor ssr
 - use layout.tsx
-- hook up minting addresses
