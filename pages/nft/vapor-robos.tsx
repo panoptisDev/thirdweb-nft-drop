@@ -1,4 +1,10 @@
-import { useAddress, useContract } from "@thirdweb-dev/react";
+import {
+  useAddress,
+  useClaimConditions,
+  useClaimNFT,
+  useContract,
+  useLazyMint,
+} from "@thirdweb-dev/react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import Image from "next/image";
@@ -9,8 +15,9 @@ import { GetServerSideProps } from "next/types";
 import { Collection } from "../../types/typings";
 import sanityClient from "../../lib/sanity";
 import imageUrlFor from "../../utils/imageUrlFor";
+import * as web3 from "web3";
 
-type MintingSteps = undefined | "minting" | "minted";
+type MintingSteps = undefined | "minting" | "minted" | "error";
 
 function VaporRobos({ collection }: { collection: Collection }) {
   // auth
@@ -21,11 +28,25 @@ function VaporRobos({ collection }: { collection: Collection }) {
   const { contract, isLoading } = useContract(collection.address, "nft-drop");
   const [claimedSupply, setClaimedSupply] = React.useState<string>("0");
   const [totalSupply, setTotalSupply] = React.useState<string>("0");
+  const [price, setPrice] = React.useState<string>("loading");
 
   const [minting, setMinting] = React.useState<MintingSteps>(undefined);
   const [add, setAdd] = React.useState(false);
+  const { data, error } = useClaimConditions(contract);
 
   useEffect(() => {
+    if (!contract) return;
+
+    (async () => {
+      if (data && !error) {
+        setPrice(web3.default.utils.fromWei(data[0].price.toString()));
+      }
+    })();
+  }, [data, contract]);
+
+  useEffect(() => {
+    if (!contract) return;
+
     (async () => {
       const [claimed, total] = await Promise.all([
         contract?.totalClaimedSupply(),
@@ -41,12 +62,6 @@ function VaporRobos({ collection }: { collection: Collection }) {
       return;
     }
 
-    if (minting === "minting") {
-      setTimeout(() => {
-        setMinting("minted");
-      }, 3000);
-    }
-
     if (minting === "minted") {
       setTimeout(() => {
         setMinting(undefined);
@@ -59,6 +74,31 @@ function VaporRobos({ collection }: { collection: Collection }) {
       }, 3000);
     }
   }, [address, minting, add, contract, isLoading]);
+
+  const mintNft = async () => {
+    if (!contract || !address) return;
+
+    const quantity = 1;
+
+    setMinting("minting");
+
+    await contract
+      .claim(quantity, true)
+      .then(async (tx: any) => {
+        const receipt = tx[0].receipt;
+        const claimedNFT = await tx[0].data;
+        setMinting("minted");
+
+        console.log("claimedNFT", claimedNFT);
+        console.log("receipt", receipt);
+      })
+      .catch((err: unknown) => {
+        setMinting("error");
+      })
+      .finally(() => {
+        setMinting(undefined);
+      });
+  };
 
   const allMinted = Number(claimedSupply) >= Number(totalSupply);
   const disabled = address === undefined || allMinted || minting !== undefined;
@@ -170,9 +210,7 @@ function VaporRobos({ collection }: { collection: Collection }) {
               disabled ? "cursor-not-allowed" : "cursor-pointer"
             }`}
             onClick={() => {
-              if (address && minting === undefined) {
-                setMinting("minting");
-              }
+              if (address && minting === undefined) mintNft();
             }}
           >
             {minting && (
@@ -183,10 +221,16 @@ function VaporRobos({ collection }: { collection: Collection }) {
                       <span>mint starting</span>
                     </div>
                   </div>
-                ) : (
+                ) : "minted" ? (
                   <div className="alert alert-success">
                     <div>
                       <span>mint success</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="alert alert-error">
+                    <div>
+                      <span>mint failed</span>
                     </div>
                   </div>
                 )}
@@ -203,7 +247,7 @@ function VaporRobos({ collection }: { collection: Collection }) {
                 }
               }}
             >
-              mint nft (0.01 eth)
+              mint nft ({price} eth)
             </button>
           </div>
         </div>
